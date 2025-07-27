@@ -1,10 +1,14 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-});
+}) : null;
 
 export async function getOpenAIRecommendations(onboardingData: any) {
+  if (!openai) {
+    throw new Error("OpenAI API key not configured");
+  }
+
   const prompt = `
 A user has submitted the following onboarding data for a fitness app:
 ${JSON.stringify(onboardingData, null, 2)}

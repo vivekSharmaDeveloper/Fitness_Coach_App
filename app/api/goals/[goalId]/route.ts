@@ -3,7 +3,7 @@ import { connectToDatabase } from "@/lib/mongodb";
 import { Goal } from "@/models/Goal";
 import { goalSchema } from "@/lib/validations/goals";
 
-export async function PUT(req, { params }) {
+export async function PUT(req: Request, { params }: { params: { goalId: string } }) {
   await connectToDatabase();
   const { goalId } = params;
   const data = await req.json();
@@ -21,11 +21,11 @@ export async function PUT(req, { params }) {
     if (!updated) return NextResponse.json({ error: "Goal not found" }, { status: 404 });
     return NextResponse.json({ success: true, goal: updated });
   } catch (error) {
-    return NextResponse.json({ error: error.message || "Failed to update goal" }, { status: 400 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to update goal" }, { status: 400 });
   }
 }
 
-export async function DELETE(req, { params }) {
+export async function DELETE(req: Request, { params }: { params: { goalId: string } }) {
   await connectToDatabase();
   const { goalId } = params;
   try {
@@ -33,6 +33,6 @@ export async function DELETE(req, { params }) {
     if (!deleted) return NextResponse.json({ error: "Goal not found" }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: error.message || "Failed to delete goal" }, { status: 400 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to delete goal" }, { status: 400 });
   }
-} 
+}

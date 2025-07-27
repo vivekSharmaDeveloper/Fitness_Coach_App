@@ -15,7 +15,7 @@ export async function GET() {
     return NextResponse.json({
       message: 'Users fetched successfully',
       count: users.length,
-      users: users.map(user => ({
+      users: users.map((user: any) => ({
         id: user._id.toString(),
         name: user.name,
         email: user.email,

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Goal } from "@/models/Goal";
 
-export async function POST(req, { params }) {
+export async function POST(req: Request, { params }: { params: { goalId: string } }) {
   await connectToDatabase();
   const { goalId } = params;
   try {
@@ -10,6 +10,6 @@ export async function POST(req, { params }) {
     if (!updated) return NextResponse.json({ error: "Goal not found" }, { status: 404 });
     return NextResponse.json({ success: true, goal: updated });
   } catch (error) {
-    return NextResponse.json({ error: error.message || "Failed to reset progress" }, { status: 400 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to reset progress" }, { status: 400 });
   }
 } 

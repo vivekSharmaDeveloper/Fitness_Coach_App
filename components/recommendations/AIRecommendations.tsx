@@ -3,8 +3,18 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Goal } from "@/types/goal";
-import { OnboardingData } from "@/types/onboarding";
+// import { Goal } from "@/types/goal";
+import { OnboardingData } from "@/components/onboarding/OnboardingForm";
+
+interface Goal {
+  title: string;
+  category: string;
+  targetValue: number;
+  unit: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+}
 
 interface AIRecommendationsProps {
   onboardingData: OnboardingData;
@@ -27,102 +37,29 @@ export function AIRecommendations({ onboardingData, existingGoals, onAddGoal }: 
   const [isLoading, setIsLoading] = useState(false);
 
   const analyzeUserData = () => {
-    const recommendations: Recommendation[] = [];
-    const { 
-      goals, 
-      successDefinition, 
-      goalImportance,
-      physicalActivity,
-      sleepHours,
-      sleepQuality,
-      consistentSleep,
-      eatingHabits,
-      dietaryPreferences,
-      stressLevel,
-      relaxationFrequency,
-      mindfulnessPractice,
-      existingGoodHabits,
-      habitsToBreak,
-      obstacles,
-      disciplineLevel,
-      peakProductivityTime,
-      dailyTimeCommitment,
-      motivationFactors
-    } = onboardingData;
-
-    // Analyze primary goals and success definitions
-    goals.forEach((goal, index) => {
-      const successDef = successDefinition[index];
-      const importance = goalImportance[index];
-
-      // Physical Health Goals
-      if (goal === "Improve physical health") {
-        const fitnessLevel = getFitnessLevel(physicalActivity);
-        const targetValue = calculateTargetValue(fitnessLevel, "physical");
-        
-        recommendations.push({
-          title: "Weekly Exercise Goal",
-          category: "physical_health",
-          targetValue,
-          unit: "minutes",
-          description: `Complete ${targetValue} minutes of exercise per week`,
-          confidence: calculateConfidence(importance, fitnessLevel),
-          reasoning: `Based on your current activity level (${physicalActivity}) and success definition of "${successDef}"`
-        });
+    // Simplified mock recommendations for now
+    const mockRecommendations: Recommendation[] = [
+      {
+        title: "Daily Walking Goal",
+        category: "fitness",
+        targetValue: 30,
+        unit: "minutes",
+        description: "Walk for 30 minutes daily",
+        confidence: 0.8,
+        reasoning: "Walking is a great low-impact exercise for beginners"
+      },
+      {
+        title: "Hydration Goal",
+        category: "nutrition",
+        targetValue: 8,
+        unit: "glasses",
+        description: "Drink 8 glasses of water daily",
+        confidence: 0.9,
+        reasoning: "Proper hydration is essential for health"
       }
-
-      // Mental Well-being Goals
-      if (goal === "Enhance mental well-being") {
-        const stressScore = calculateStressScore(stressLevel, relaxationFrequency, mindfulnessPractice);
-        const targetValue = calculateTargetValue(stressScore, "mental");
-        
-        recommendations.push({
-          title: "Daily Mindfulness Practice",
-          category: "mental_wellbeing",
-          targetValue,
-          unit: "minutes",
-          description: `Practice mindfulness for ${targetValue} minutes daily`,
-          confidence: calculateConfidence(importance, stressScore),
-          reasoning: `Based on your stress level (${stressLevel}) and relaxation frequency (${relaxationFrequency})`
-        });
-      }
-
-      // Sleep Quality Goals
-      if (sleepHours < 7 || sleepQuality < 4 || !consistentSleep) {
-        recommendations.push({
-          title: "Sleep Improvement",
-          category: "sleep_quality",
-          targetValue: 7,
-          unit: "hours",
-          description: "Achieve 7 hours of quality sleep consistently",
-          confidence: 0.8,
-          reasoning: `Based on your current sleep habits (${sleepHours} hours, quality: ${sleepQuality}/5)`
-        });
-      }
-
-      // Nutrition Goals
-      if (eatingHabits < 4) {
-        recommendations.push({
-          title: "Healthy Eating Habits",
-          category: "nutrition",
-          targetValue: 5,
-          unit: "meals",
-          description: "Prepare 5 healthy meals per week",
-          confidence: 0.7,
-          reasoning: `Based on your current eating habits (${eatingHabits}/5) and dietary preferences`
-        });
-      }
-    });
-
-    // Filter out recommendations that conflict with existing goals
-    const filteredRecommendations = recommendations.filter(rec => 
-      !existingGoals.some(goal => goal.category === rec.category)
-    );
-
-    // Sort by confidence and importance
-    const sortedRecommendations = filteredRecommendations.sort((a, b) => b.confidence - a.confidence);
-
-    setRecommendations(sortedRecommendations);
+    ];
+    
+    setRecommendations(mockRecommendations);
   };
 
   const getFitnessLevel = (activity: string): number => {

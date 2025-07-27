@@ -34,7 +34,7 @@ export default function TestAuthPage() {
         <p className="text-sm mt-2">
           <strong>Name:</strong> {session.user?.name}<br/>
           <strong>Email:</strong> {session.user?.email}<br/>
-          <strong>ID:</strong> {session.user?.id}
+          <strong>Image:</strong> {session.user?.image || 'None'}
         </p>
       </div>
       

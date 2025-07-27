@@ -8,21 +8,23 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
+    const userId = (session.user as any).id || session.user.email;
+
     await connectDB();
     const data = await req.json();
 
     // Create or update user preferences
     const userPreference = await UserPreference.findOneAndUpdate(
-      { userId: session.user.id },
+      { userId },
       {
-        userId: session.user.id,
+        userId,
         ...data,
       },
       {

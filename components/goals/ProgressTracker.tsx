@@ -5,7 +5,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Goal } from "@/types/goal";
+// import { Goal } from "@/types/goal";
+
+interface Goal {
+  _id: string;
+  title: string;
+  targetValue: number;
+  currentProgress?: number;
+  status: string;
+}
 
 interface ProgressTrackerProps {
   goals: Goal[];

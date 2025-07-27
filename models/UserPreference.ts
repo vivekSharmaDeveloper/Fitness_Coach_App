@@ -48,7 +48,6 @@ const userPreferenceSchema = new mongoose.Schema({
   
   // Step 2: Sleep and Nutrition
   sleepHours: Number,
-  sleepQuality: String,
   eatingHabits: String,
   waterIntake: Number, // liters per day
   

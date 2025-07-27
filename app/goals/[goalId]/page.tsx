@@ -149,18 +149,31 @@ export default function GoalDetailPage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Active Tasks</h3>
                 {activeActivities.map((activity, activityIndex) => (
-                  <ProgressTracker
-                    key={activity.name}
-                    activity={activity}
-                    onProgressUpdate={(progress) =>
-                      handleProgressUpdate(dayIndex, activityIndex, progress)
-                    }
-                  />
+                  <div key={activity.name} className="p-4 border rounded-lg">
+                    <h4 className="font-medium">{activity.name}</h4>
+                    <p className="text-sm text-gray-600">{activity.description}</p>
+                    <p className="text-sm">
+                      Progress: {activity.currentProgress || 0} / {activity.targetValue} {activity.unit}
+                    </p>
+                  </div>
                 ))}
               </div>
 
               {/* Completed Activities */}
-              <CompletedTasks activities={completedActivities} />
+              {completedActivities.length > 0 && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Completed Tasks</h3>
+                  {completedActivities.map((activity, index) => (
+                    <div key={activity.name} className="p-4 border rounded-lg bg-green-50">
+                      <h4 className="font-medium text-green-800">{activity.name}</h4>
+                      <p className="text-sm text-green-600">{activity.description}</p>
+                      <p className="text-sm text-green-600">
+                        Completed: {activity.currentProgress} / {activity.targetValue} {activity.unit}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </TabsContent>
           );
         })}

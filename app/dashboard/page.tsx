@@ -22,8 +22,8 @@ export default function DashboardPage() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
   
-  const [goals, setGoals] = useState([]);
-  const [categoryCounts, setCategoryCounts] = useState({});
+  const [goals, setGoals] = useState<any[]>([]);
+  const [categoryCounts, setCategoryCounts] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 

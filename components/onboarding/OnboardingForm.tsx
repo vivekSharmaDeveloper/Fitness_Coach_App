@@ -42,7 +42,7 @@ export interface OnboardingData {
 
 const TOTAL_STEPS = 7;
 
-export function OnboardingForm() {
+export function OnboardingForm({ onComplete }: OnboardingFormProps) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<OnboardingData>({
