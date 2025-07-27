@@ -26,17 +26,13 @@ export function ProgressTracker({ goals }: ProgressTrackerProps) {
     setIsMounted(true);
   }, []);
 
-  // Calculate total progress and target
-  const totalProgress = goals.reduce((sum, goal) => sum + (goal.currentProgress || 0), 0);
-  const totalTarget = goals.reduce((sum, goal) => sum + goal.targetValue, 0);
-  
-  // Calculate overall progress percentage
-  const overallProgress = totalTarget > 0 ? (totalProgress / totalTarget) * 100 : 0;
-
   // Calculate completed goals
   const completedGoals = goals.filter(
     (goal) => goal.status === "completed"
   ).length;
+
+  // Calculate percentage based on goal completion
+  const overallProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
 
   const getProgressColor = (percentage: number) => {
     if (percentage <= 33) {
@@ -64,9 +60,6 @@ export function ProgressTracker({ goals }: ProgressTrackerProps) {
               <p className="text-sm text-muted-foreground">
                 {completedGoals} of {goals.length} goals completed
               </p>
-              <p className="text-sm text-muted-foreground">
-                {totalProgress.toFixed(1)} / {totalTarget.toFixed(1)} units
-              </p>
             </div>
             <div className="text-right">
               <p className="text-2xl font-bold">{Math.round(overallProgress)}%</p>
@@ -84,9 +77,8 @@ export function ProgressTracker({ goals }: ProgressTrackerProps) {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CheckCircle2 className="h-4 w-4" />
             <span>
-              {completedGoals === goals.length 
-                ? "All goals completed! 🎉"
-                : `${goals.length - completedGoals} goals remaining`
+{goals.length === 0 ? "Start your goal journey!" :
+                completedGoals === goals.length ? "All goals completed! 🎉" : `${goals.length - completedGoals} goals remaining`
               }
             </span>
           </div>

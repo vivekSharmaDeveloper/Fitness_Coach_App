@@ -18,12 +18,12 @@ export async function POST(req: Request) {
     await connectDB();
     const data = await req.json();
 
-    // Update user with onboarding data and mark as completed
+    // Update user with partial onboarding data (don't mark as completed)
     const updatedUser = await User.findOneAndUpdate(
       { email: session.user.email },
       {
         ...data,
-        onboardingCompleted: true,
+        // Don't set onboardingCompleted to true for partial saves
       },
       {
         new: true,
@@ -39,14 +39,14 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({
-      message: 'Onboarding completed successfully',
+      message: 'Partial onboarding data saved successfully',
       user: updatedUser,
     });
   } catch (error) {
-    console.error('Error in onboarding API:', error);
+    console.error('Error in partial onboarding API:', error);
     return NextResponse.json(
-      { error: 'Failed to save onboarding data' },
+      { error: 'Failed to save partial onboarding data' },
       { status: 500 }
     );
   }
-} 
+}

@@ -27,15 +27,17 @@ export async function GET() {
     }
 
     return NextResponse.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      image: user.image,
-      emailVerified: user.emailVerified,
-      onboardingCompleted: user.onboardingCompleted,
-      lastLogin: user.lastLogin,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        emailVerified: user.emailVerified,
+        onboardingCompleted: user.onboardingCompleted,
+        lastLogin: user.lastLogin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      }
     });
 
   } catch (error) {

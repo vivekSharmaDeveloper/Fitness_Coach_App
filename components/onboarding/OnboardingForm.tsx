@@ -96,28 +96,29 @@ export function OnboardingForm({ onComplete }: OnboardingFormProps) {
     }
   };
 
-  const nextStep = () => setCurrentStep(prev => prev + 1);
-  const prevStep = () => setCurrentStep(prev => prev - 1);
-  
-  const handleSkip = () => {
-    router.push('/dashboard');
+  const nextStep = async () => {
+    // Save partial data when moving to next step
+    try {
+      await fetch('/api/onboarding/partial', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.error('Error saving partial data:', error);
+    }
+    setCurrentStep(prev => prev + 1);
   };
+  
+  const prevStep = () => setCurrentStep(prev => prev - 1);
 
   return (
     <div className="max-w-2xl mx-auto">
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
-            <CardTitle>Step {currentStep} of {TOTAL_STEPS}</CardTitle>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={handleSkip}
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              Skip for now
-            </Button>
-          </div>
+          <CardTitle>Step {currentStep} of {TOTAL_STEPS}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -151,37 +152,19 @@ export function OnboardingForm({ onComplete }: OnboardingFormProps) {
               </div>
               <div className="flex gap-2">
                 {currentStep < TOTAL_STEPS ? (
-                  <>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={handleSkip}
-                    >
-                      Skip
-                    </Button>
-                    <Button
-                      type="button"
-                      onClick={nextStep}
-                    >
-                      Next
-                    </Button>
-                  </>
+                  <Button
+                    type="button"
+                    onClick={nextStep}
+                  >
+                    Next
+                  </Button>
                 ) : (
-                  <>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={handleSkip}
-                    >
-                      Skip
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? 'Completing...' : 'Complete'}
-                    </Button>
-                  </>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Completing...' : 'Complete'}
+                  </Button>
                 )}
               </div>
             </div>
