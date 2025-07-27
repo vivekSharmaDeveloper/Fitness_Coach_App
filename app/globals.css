@@ -1,0 +1,303 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+ 
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+ 
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+ 
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+ 
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+ 
+    --radius: 0.5rem;
+ 
+    --chart-1: 12 76% 61%;
+ 
+    --chart-2: 173 58% 39%;
+ 
+    --chart-3: 197 37% 24%;
+ 
+    --chart-4: 43 74% 66%;
+ 
+    --chart-5: 27 87% 67%;
+  }
+ 
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+ 
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+ 
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+ 
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+ 
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+ 
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+ 
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+ 
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .auth-container {
+    @apply min-h-screen flex;
+  }
+
+  .auth-form-container {
+    @apply flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800;
+  }
+
+  .auth-form-wrapper {
+    @apply max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl;
+  }
+
+  .auth-form-title {
+    @apply mt-2 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white;
+  }
+
+  .auth-form-subtitle {
+    @apply mt-2 text-center text-sm text-gray-600 dark:text-gray-400;
+  }
+
+  .auth-input-wrapper {
+    @apply relative;
+  }
+
+  .auth-input-icon {
+    @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400;
+  }
+
+  .auth-input {
+    @apply appearance-none relative block w-full pl-10 px-3 py-3
+           border border-gray-300 dark:border-gray-600
+           placeholder-gray-500 dark:placeholder-gray-400
+           text-gray-900 dark:text-white
+           rounded-xl
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+           dark:bg-gray-700
+           transition-all duration-200;
+  }
+
+  .auth-input-error {
+    @apply border-red-500 focus:ring-red-500;
+  }
+
+  .auth-input-success {
+    @apply border-green-500 focus:ring-green-500;
+  }
+
+  .auth-error-message {
+    @apply mt-1 text-sm text-red-500;
+  }
+
+  .auth-success-message {
+    @apply mt-1 text-sm text-green-500;
+  }
+
+  .auth-button {
+    @apply relative flex justify-center items-center
+           py-3 px-4
+           border border-transparent
+           text-sm font-medium
+           rounded-xl
+           text-white
+           bg-indigo-600 hover:bg-indigo-700
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+           transition-all duration-200
+           hover:shadow-lg
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .auth-button-secondary {
+    @apply bg-white dark:bg-gray-700
+           text-gray-700 dark:text-gray-200
+           border-gray-300 dark:border-gray-600
+           hover:bg-gray-50 dark:hover:bg-gray-600;
+  }
+
+  .auth-link {
+    @apply font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors;
+  }
+
+  .auth-divider {
+    @apply relative my-6;
+  }
+
+  .auth-divider-line {
+    @apply absolute inset-0 flex items-center;
+  }
+
+  .auth-divider-line-inner {
+    @apply w-full border-t border-gray-300 dark:border-gray-600;
+  }
+
+  .auth-divider-text {
+    @apply relative flex justify-center text-sm;
+  }
+
+  .auth-divider-text-inner {
+    @apply px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400;
+  }
+
+  .auth-social-button {
+    @apply w-full inline-flex justify-center py-2.5 px-4
+           border border-gray-300 dark:border-gray-600
+           rounded-xl shadow-sm
+           bg-white dark:bg-gray-700
+           text-sm font-medium
+           text-gray-500 dark:text-gray-400
+           hover:bg-gray-50 dark:hover:bg-gray-600
+           transition-all duration-200
+           hover:shadow-md;
+  }
+
+  .auth-checkbox-wrapper {
+    @apply flex items-center;
+  }
+
+  .auth-checkbox {
+    @apply h-4 w-4
+           rounded
+           border-gray-300 dark:border-gray-600
+           text-indigo-600 dark:text-indigo-400
+           focus:ring-indigo-500 dark:focus:ring-indigo-400;
+  }
+
+  .auth-checkbox-label {
+    @apply ml-2 block text-sm text-gray-900 dark:text-gray-300;
+  }
+
+  .auth-password-strength {
+    @apply mt-2 h-1 rounded-full bg-gray-200 dark:bg-gray-700;
+  }
+
+  .auth-password-strength-bar {
+    @apply h-full rounded-full transition-all duration-300;
+  }
+
+  .auth-password-strength-bar-weak {
+    @apply w-1/3 bg-red-500;
+  }
+
+  .auth-password-strength-bar-medium {
+    @apply w-2/3 bg-yellow-500;
+  }
+
+  .auth-password-strength-bar-strong {
+    @apply w-full bg-green-500;
+  }
+
+  .auth-password-requirements {
+    @apply mt-2 text-xs text-gray-500 dark:text-gray-400;
+  }
+
+  .auth-password-requirement {
+    @apply flex items-center space-x-1;
+  }
+
+  .auth-password-requirement-met {
+    @apply text-green-500;
+  }
+
+  .auth-password-requirement-unmet {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  .auth-success-icon {
+    @apply mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900;
+  }
+
+  .auth-success-icon-inner {
+    @apply h-6 w-6 text-green-600 dark:text-green-400;
+  }
+}
+
+/* Custom styles for dark mode transitions */
+.dark {
+  color-scheme: dark;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #777;
+} 
