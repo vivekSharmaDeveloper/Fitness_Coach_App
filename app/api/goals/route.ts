@@ -6,6 +6,9 @@ import { Goal } from "@/models/Goal";
 import { goalSchema } from "@/lib/validations/goals";
 import { z } from "zod";
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);

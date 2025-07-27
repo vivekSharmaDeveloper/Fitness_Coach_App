@@ -1,10 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { RecommendedGoal } from "@/models/RecommendedGoal";
 
-export async function GET(req: Request) {
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
+    const { searchParams } = new URL(request.url);
     const userId = searchParams.get("userId") || "dev-user"; // For development
 
     console.log("Fetching recommendations for user:", userId);

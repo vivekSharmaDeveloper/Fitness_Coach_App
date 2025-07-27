@@ -1,10 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { RecommendedGoal } from "@/models/RecommendedGoal";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-export async function GET() {
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     const userId = session?.user?.email || "dev-user";

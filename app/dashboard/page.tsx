@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { CategoryTabs } from "@/components/goals/CategoryTabs";
 import GoalCard from "@/components/goals/GoalCard";
@@ -18,7 +18,7 @@ const CATEGORIES = [
   { value: "other", label: "Other" },
 ] as const;
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
   
@@ -206,5 +206,17 @@ export default function DashboardPage() {
         <RecommendationsSection />
       </section>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto py-8 flex items-center justify-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   );
 }
