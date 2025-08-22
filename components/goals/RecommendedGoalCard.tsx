@@ -23,7 +23,7 @@ interface RecommendedGoalCardProps {
     title: string;
     description: string;
     category: string;
-    planDetails: {
+    planDetails?: {
       type: string;
       requirements?: {
         difficulty?: string;
@@ -120,7 +120,7 @@ export function RecommendedGoalCard({ goal }: RecommendedGoalCardProps) {
               <Badge variant="outline">
                 {categoryLabels[goal.category as keyof typeof categoryLabels]}
               </Badge>
-              {goal.planDetails.requirements?.difficulty && (
+              {goal.planDetails?.requirements?.difficulty && (
                 <Badge className={difficultyColors[goal.planDetails.requirements.difficulty as keyof typeof difficultyColors]}>
                   {goal.planDetails.requirements.difficulty}
                 </Badge>
@@ -129,7 +129,7 @@ export function RecommendedGoalCard({ goal }: RecommendedGoalCardProps) {
 
             <p className="text-sm text-gray-600">{goal.description}</p>
 
-            {goal.planDetails.requirements?.timeCommitment && (
+            {goal.planDetails?.requirements?.timeCommitment && (
               <div className="text-sm text-gray-500">
                 Time Commitment: {goal.planDetails.requirements.timeCommitment}
               </div>

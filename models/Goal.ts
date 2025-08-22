@@ -16,6 +16,7 @@ export interface IGoal extends Document {
   potentialObstacles?: string;
   strategies?: string;
   notes?: string;
+  currentProgress: number;
   status: "not_started" | "in_progress" | "completed" | "abandoned";
   createdAt: Date;
   updatedAt: Date;
@@ -80,6 +81,11 @@ const GoalSchema = new Schema<IGoal>(
     },
     notes: {
       type: String,
+    },
+    currentProgress: {
+      type: Number,
+      required: true,
+      default: 0,
     },
     status: {
       type: String,

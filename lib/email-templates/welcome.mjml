@@ -1,0 +1,49 @@
+<mj-text font-size="24px" font-weight="bold" color="#3B82F6" padding-bottom="20px">
+  Welcome to Fitness Coach! 🎉
+</mj-text>
+
+<mj-text font-size="18px" padding-bottom="15px">
+  Hi {{name}},
+</mj-text>
+
+<mj-text padding-bottom="20px">
+  We're thrilled to have you join the Fitness Coach community! You've taken the first step toward transforming your fitness journey, and we're here to support you every step of the way.
+</mj-text>
+
+<mj-text padding-bottom="20px">
+  Here's what you can expect from your Fitness Coach experience:
+</mj-text>
+
+<mj-text padding-bottom="10px">
+  • 📈 <strong>Personalized Fitness Goals</strong> - Set and track custom fitness objectives
+</mj-text>
+
+<mj-text padding-bottom="10px">
+  • 📊 <strong>Progress Tracking</strong> - Monitor your achievements with detailed analytics
+</mj-text>
+
+<mj-text padding-bottom="10px">
+  • 🤖 <strong>AI-Powered Recommendations</strong> - Get personalized workout and nutrition suggestions
+</mj-text>
+
+<mj-text padding-bottom="10px">
+  • 🏆 <strong>Achievement System</strong> - Earn badges and celebrate your milestones
+</mj-text>
+
+<mj-text padding-bottom="30px">
+  • 📱 <strong>Responsive Design</strong> - Access your dashboard from any device
+</mj-text>
+
+<mj-button href="{{loginUrl}}" background-color="#3B82F6" color="white" font-size="16px" font-weight="bold" border-radius="8px" padding="15px 30px">
+  Start Your Journey
+</mj-button>
+
+<mj-text font-size="14px" color="#6B7280" padding-top="30px">
+  <strong>Need help getting started?</strong><br/>
+  Check out our getting started guide or reach out to our support team. We're always here to help you succeed!
+</mj-text>
+
+<mj-text font-size="14px" color="#6B7280" padding-top="20px">
+  Best regards,<br/>
+  <strong>The Fitness Coach Team</strong>
+</mj-text>

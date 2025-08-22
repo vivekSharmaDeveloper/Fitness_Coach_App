@@ -45,13 +45,13 @@ export default function HomePage() {
             <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-                  <span className="block xl:inline">Transform Your</span>{' '}
+                  <span className="block xl:inline">Track Your</span>{' '}
                   <span className="block text-indigo-600 dark:text-indigo-400 xl:inline">
-                    Fitness Journey
+                    Routine Progress
                   </span>
                 </h1>
                 <p className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Set SMART goals, track your progress, and get AI-powered recommendations 
+                  Set goals, track your routines, and monitor your progress 
                   to achieve your fitness and wellness objectives.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -79,9 +79,9 @@ export default function HomePage() {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <div className="h-56 w-full bg-gradient-to-r from-indigo-500 to-purple-600 sm:h-72 md:h-96 lg:w-full lg:h-full flex items-center justify-center">
             <div className="text-center text-white">
-              <div className="text-8xl mb-4">💪</div>
-              <h2 className="text-2xl font-bold">Your Fitness Coach</h2>
-              <p className="text-lg opacity-90">AI-Powered Goal Setting</p>
+              <div className="text-8xl mb-4">📊</div>
+              <h2 className="text-2xl font-bold">Routine Tracker</h2>
+              <p className="text-lg opacity-90">Smart Progress Tracking</p>
             </div>
           </div>
         </div>

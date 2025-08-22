@@ -1,0 +1,59 @@
+<mjml>
+  <mj-head>
+    <mj-title>Fitness Coach</mj-title>
+    <mj-preview>{{preview}}</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-text font-size="16px" color="#333333" line-height="24px" />
+      <mj-section background-color="#ffffff" padding="20px" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .primary-color { color: #3B82F6 !important; }
+      .secondary-color { color: #6B7280 !important; }
+      .success-color { color: #10B981 !important; }
+      .warning-color { color: #F59E0B !important; }
+      .error-color { color: #EF4444 !important; }
+      .button-primary {
+        background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%) !important;
+        border-radius: 8px !important;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#F9FAFB">
+    <!-- Header -->
+    <mj-section background-color="#ffffff" padding="40px 20px 20px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="32px" font-weight="bold" color="#3B82F6">
+          💪 Fitness Coach
+        </mj-text>
+        <mj-text align="center" font-size="16px" color="#6B7280" padding-top="10px">
+          Your Personal Fitness Journey
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Content Section -->
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        {{content}}
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#F3F4F6" padding="40px 20px">
+      <mj-column>
+        <mj-divider border-color="#E5E7EB" border-width="1px"></mj-divider>
+        <mj-text align="center" font-size="14px" color="#6B7280" padding-top="20px">
+          <strong>Fitness Coach</strong><br/>
+          Your trusted fitness companion
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#9CA3AF" padding-top="10px">
+          If you have any questions, reply to this email or contact us at support@fitnesscoach.com
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#9CA3AF" padding-top="10px">
+          © 2024 Fitness Coach. All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

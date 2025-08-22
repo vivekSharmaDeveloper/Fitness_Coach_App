@@ -1,6 +1,4 @@
 import { ReactNode } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -9,17 +7,17 @@ interface AuthLayoutProps {
   footer?: ReactNode;
 }
 
-export default function AuthLayout({ children, title, subtitle, footer }: AuthLayoutProps) {
+export function AuthLayout({ children, title, subtitle, footer }: AuthLayoutProps) {
   return (
     <div className="auth-container">
       <div className="auth-form-container">
         <div className="auth-form-wrapper">
           <div className="text-center">
-            <Link href="/" className="inline-block">
-              <div className="mx-auto w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">FC</span>
+            <div className="mx-auto mb-4">
+              <div className="mx-auto w-16 h-16 bg-indigo-600 rounded-lg flex items-center justify-center mb-3">
+                <h3 className="text-white font-bold text-sm">Routine Tracker</h3>
               </div>
-            </Link>
+            </div>
             <h1 className="auth-form-title">{title}</h1>
             {subtitle && <p className="auth-form-subtitle">{subtitle}</p>}
           </div>
@@ -51,4 +49,7 @@ export default function AuthLayout({ children, title, subtitle, footer }: AuthLa
       </div>
     </div>
   );
-} 
+}
+
+// Also provide default export for compatibility
+export default AuthLayout;

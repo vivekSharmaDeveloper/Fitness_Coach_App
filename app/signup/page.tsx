@@ -10,11 +10,13 @@ import { AuthInput } from '@/components/auth/AuthInput';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { SocialLoginButton } from '@/components/auth/SocialLoginButton';
 import { PasswordStrength } from '@/components/auth/PasswordStrength';
+import { toast } from 'sonner';
 
 export default function SignupPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,10 +28,12 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setEmailError('');
+    setPasswordError('');
 
+    // Check password match
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setPasswordError('Passwords do not match');
       setIsLoading(false);
       return;
     }
@@ -41,8 +45,6 @@ export default function SignupPage() {
         password: formData.password,
       };
       
-      console.log('Submitting signup request:', { ...requestData, password: '[HIDDEN]' });
-      
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -51,15 +53,34 @@ export default function SignupPage() {
 
       if (!response.ok) {
         const data = await response.json();
-        console.error('Signup failed:', { status: response.status, data });
-        throw new Error(data.message || 'Something went wrong');
+        
+        // Handle specific error messages
+        if (data.message && data.message.includes('already exists')) {
+          toast.error('User with this email already exists', {
+            position: 'top-right',
+            style: {
+              background: '#fef2f2',
+              border: '1px solid #fecaca',
+              color: '#dc2626'
+            }
+          });
+          setEmailError('User with this email already exists');
+        } else {
+          toast.error(data.message || 'Something went wrong', {
+            position: 'top-right'
+          });
+        }
+        return;
       }
 
       const data = await response.json();
-      console.log('Signup successful:', data);
+      
+      // Show success toast
+      toast.success('Account created successfully!', {
+        position: 'top-right'
+      });
       
       // Now try to sign in the user automatically
-      console.log('Attempting auto-login...');
       const result = await signIn('credentials', {
         email: formData.email,
         password: formData.password,
@@ -67,17 +88,20 @@ export default function SignupPage() {
       });
 
       if (result?.error) {
-        console.error('Auto-login failed:', result.error);
         // If auto-login fails, redirect to login page
-        alert('Account created successfully! Please log in.');
+        toast.success('Please log in to continue', {
+          position: 'top-right'
+        });
         router.push('/login');
         return;
       }
 
-      console.log('Auto-login successful, redirecting to dashboard');
-      router.push('/dashboard');
+      // Auto-login successful, redirect to onboarding or dashboard
+      router.push('/onboarding');
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'An error occurred');
+      toast.error('An unexpected error occurred. Please try again.', {
+        position: 'top-right'
+      });
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +112,9 @@ export default function SignupPage() {
     try {
       await signIn(provider, { callbackUrl: '/dashboard' });
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.', {
+        position: 'top-right'
+      });
       setIsLoading(false);
     }
   };
@@ -126,10 +152,16 @@ export default function SignupPage() {
           label="Email address"
           icon={AtSign}
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={(e) => {
+            setFormData({ ...formData, email: e.target.value });
+            // Clear email error when user starts typing
+            if (emailError) {
+              setEmailError('');
+            }
+          }}
           required
           autoComplete="email"
-          error={error}
+          error={emailError}
         />
 
         <AuthInput
@@ -154,10 +186,17 @@ export default function SignupPage() {
           label="Confirm password"
           icon={Lock}
           value={formData.confirmPassword}
-          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+          onChange={(e) => {
+            setFormData({ ...formData, confirmPassword: e.target.value });
+            // Clear password error when user starts typing
+            if (passwordError) {
+              setPasswordError('');
+            }
+          }}
           required
           autoComplete="new-password"
           showPasswordToggle
+          error={passwordError}
         />
 
         <div className="auth-checkbox-wrapper">

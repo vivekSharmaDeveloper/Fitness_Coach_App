@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-import { PlusCircle, User, Settings, Heart, LogOut, ChevronDown } from 'lucide-react';
+import { PlusCircle, User, Settings, Heart, LogOut, ChevronDown, BarChart3 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,7 +41,7 @@ export function DashboardHeader() {
       const response = await fetch('/api/user/profile');
       if (response.ok) {
         const profile = await response.json();
-        setUserProfile(profile);
+        setUserProfile(profile.user); // Access the user object correctly
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -71,9 +71,9 @@ export function DashboardHeader() {
         <div className="flex items-center space-x-4">
           <Link href="/dashboard" className="flex items-center space-x-2">
             <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">FC</span>
+              <span className="text-primary-foreground font-bold text-sm">RT</span>
             </div>
-            <span className="font-bold text-lg">Fitness Coach</span>
+            <span className="font-bold text-lg">Routine Tracker</span>
           </Link>
         </div>
 
@@ -115,9 +115,6 @@ export function DashboardHeader() {
                   <p className="text-sm font-medium leading-none">
                     Hi, {displayName}!
                   </p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    {session?.user?.email}
-                  </p>
                 </div>
               </DropdownMenuLabel>
               
@@ -134,6 +131,13 @@ export function DashboardHeader() {
                 <Link href="/profile/interests" className="flex items-center space-x-2 cursor-pointer">
                   <Heart className="h-4 w-4" />
                   <span>My Interests</span>
+                </Link>
+              </DropdownMenuItem>
+              
+              <DropdownMenuItem asChild>
+                <Link href="/my-stats" className="flex items-center space-x-2 cursor-pointer">
+                  <BarChart3 className="h-4 w-4" />
+                  <span>My Stats</span>
                 </Link>
               </DropdownMenuItem>
               

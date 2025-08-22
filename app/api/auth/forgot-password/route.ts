@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { User } from "@/models/User";
 import crypto from "crypto";
+import { sendForgotPasswordEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -46,9 +47,14 @@ export async function POST(request: Request) {
       resetPasswordExpires: resetTokenExpiry,
     });
 
-    // TODO: In a real application, you would send an email here
-    // For now, we'll just log the reset link
-    console.log(`Password reset link for ${email}: http://localhost:3000/auth/reset-password?token=${resetToken}`);
+    // Send password reset email
+    try {
+      await sendForgotPasswordEmail(email, user.name, resetToken);
+      console.log('Password reset email sent successfully to:', email);
+    } catch (emailError) {
+      console.error('Failed to send password reset email:', emailError);
+      // Continue anyway - don't reveal email sending issues to the user
+    }
 
     return NextResponse.json({
       message: "If an account with that email exists, we've sent a password reset link.",

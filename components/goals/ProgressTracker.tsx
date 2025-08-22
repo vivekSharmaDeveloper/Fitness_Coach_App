@@ -11,7 +11,7 @@ interface Goal {
   _id: string;
   title: string;
   targetValue: number;
-  currentProgress?: number;
+  currentProgress: number;
   status: string;
 }
 
@@ -31,8 +31,13 @@ export function ProgressTracker({ goals }: ProgressTrackerProps) {
     (goal) => goal.status === "completed"
   ).length;
 
-  // Calculate percentage based on goal completion
-  const overallProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
+  // Calculate overall progress based on individual goal progress
+  const overallProgress = goals.length > 0 
+    ? goals.reduce((acc, goal) => {
+        const goalProgress = Math.min((goal.currentProgress / goal.targetValue) * 100, 100);
+        return acc + goalProgress;
+      }, 0) / goals.length
+    : 0;
 
   const getProgressColor = (percentage: number) => {
     if (percentage <= 33) {

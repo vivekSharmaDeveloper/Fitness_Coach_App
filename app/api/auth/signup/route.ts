@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { connectToDatabase } from '@/lib/mongodb';
 import { User } from '@/models/User';
+import { sendWelcomeEmail } from '@/lib/email';
 
 export async function POST(req: Request) {
   try {
@@ -70,6 +71,15 @@ export async function POST(req: Request) {
 
     console.log('User created successfully:', user._id);
 
+    // Send welcome email (disabled temporarily for debugging)
+    // try {
+    //   await sendWelcomeEmail(email, name);
+    //   console.log('Welcome email sent successfully');
+    // } catch (emailError) {
+    //   console.error('Failed to send welcome email:', emailError);
+    //   // Don't fail the signup if email fails
+    // }
+
     // Remove password from response
     const { password: _, ...userWithoutPassword } = user.toObject();
 
@@ -82,10 +92,21 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     console.error('Signup error:', error);
+    
+    // Handle specific MongoDB errors
+    if (error && typeof error === 'object' && 'code' in error) {
+      if (error.code === 11000) {
+        return NextResponse.json(
+          { message: 'User with this email already exists' },
+          { status: 400 }
+        );
+      }
+    }
+    
     return NextResponse.json(
       { 
         message: 'Internal server error',
-        error: error instanceof Error ? error.message : String(error)
+        error: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
       },
       { status: 500 }
     );

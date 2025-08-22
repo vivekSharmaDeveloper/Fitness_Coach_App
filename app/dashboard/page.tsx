@@ -1,13 +1,30 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { CategoryTabs } from "@/components/goals/CategoryTabs";
 import GoalCard from "@/components/goals/GoalCard";
-import { ProgressTracker } from "@/components/goals/ProgressTracker";
-import { CompletedTasks } from "@/components/goals/CompletedTasks";
-import { RecommendationsSection } from "@/components/goals/RecommendationsSection";
+import { LazyWrapper, ChartLoader, CardLoader } from "@/components/ui/lazy-loader";
 import { Loader2 } from "lucide-react";
+
+// Lazy load heavy components
+const LazyProgressTracker = React.lazy(() => 
+  import("@/components/goals/ProgressTracker").then(module => ({
+    default: module.ProgressTracker
+  }))
+);
+
+const LazyCompletedTasks = React.lazy(() => 
+  import("@/components/goals/CompletedTasks").then(module => ({
+    default: module.CompletedTasks
+  }))
+);
+
+const LazyRecommendationsSection = React.lazy(() => 
+  import("@/components/goals/RecommendationsSection").then(module => ({
+    default: module.RecommendationsSection
+  }))
+);
 
 const CATEGORIES = [
   { value: "fitness", label: "Fitness" },
@@ -170,8 +187,16 @@ function DashboardContent() {
       
       {/* Progress Overview Section */}
       <section className="grid gap-6 md:grid-cols-2">
-        <ProgressTracker goals={goals} />
-        <CompletedTasks goals={goals} />
+        <LazyWrapper fallback={<ChartLoader />} rootMargin="200px">
+          <Suspense fallback={<ChartLoader />}>
+            <LazyProgressTracker goals={goals} />
+          </Suspense>
+        </LazyWrapper>
+        <LazyWrapper fallback={<CardLoader />} rootMargin="200px">
+          <Suspense fallback={<CardLoader />}>
+            <LazyCompletedTasks goals={goals} />
+          </Suspense>
+        </LazyWrapper>
       </section>
 
       {/* Goals Section */}
@@ -203,7 +228,11 @@ function DashboardContent() {
       {/* Recommendations Section */}
       <section>
         <h2 className="text-2xl font-semibold mb-4">Recommended Goals</h2>
-        <RecommendationsSection />
+        <LazyWrapper fallback={<CardLoader />} rootMargin="300px">
+          <Suspense fallback={<CardLoader />}>
+            <LazyRecommendationsSection />
+          </Suspense>
+        </LazyWrapper>
       </section>
     </div>
   );

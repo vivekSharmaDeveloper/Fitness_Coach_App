@@ -1,4 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service - Usage Terms & Conditions',
+  description: 'Read FitCoach terms of service and conditions of use. Understand your rights and responsibilities when using our AI-powered fitness coaching platform.',
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function TermsPage() {
   return (
@@ -7,7 +17,7 @@ export default function TermsPage() {
         <div className="text-center">
           <h1 className="text-4xl font-bold">Terms of Service</h1>
           <p className="text-muted-foreground mt-2">
-            Last updated: January 26, 2025
+            Last updated: 26 July, 2025
           </p>
         </div>
 
@@ -31,10 +41,10 @@ export default function TermsPage() {
               Fitness Coach is a web-based application that provides personalized fitness and wellness coaching, goal tracking, and health recommendations. The service includes features such as:
             </p>
             <ul>
-              <li>Personal goal setting and tracking</li>
-              <li>Fitness and wellness recommendations</li>
-              <li>Progress monitoring and analytics</li>
-              <li>Personalized coaching suggestions</li>
+              <li>- Personal goal setting and tracking</li>
+              <li>- Fitness and wellness recommendations</li>
+              <li>- Progress monitoring and analytics</li>
+              <li>- Personalized coaching suggestions</li>
             </ul>
           </CardContent>
         </Card>
@@ -48,10 +58,10 @@ export default function TermsPage() {
               To access certain features of the Service, you must register for an account. You are responsible for:
             </p>
             <ul>
-              <li>Maintaining the confidentiality of your account credentials</li>
-              <li>All activities that occur under your account</li>
-              <li>Notifying us immediately of any unauthorized use of your account</li>
-              <li>Providing accurate and complete information during registration</li>
+              <li>- Maintaining the confidentiality of your account credentials</li>
+              <li>- All activities that occur under your account</li>
+              <li>- Notifying us immediately of any unauthorized use of your account</li>
+              <li>- Providing accurate and complete information during registration</li>
             </ul>
           </CardContent>
         </Card>
@@ -82,11 +92,11 @@ export default function TermsPage() {
               As a user of Fitness Coach, you agree to:
             </p>
             <ul>
-              <li>Use the service only for lawful purposes</li>
-              <li>Not share your account with others</li>
-              <li>Provide accurate information about your health and fitness status</li>
-              <li>Not attempt to reverse engineer or compromise the security of the service</li>
-              <li>Respect the intellectual property rights of the service</li>
+              <li>- Use the service only for lawful purposes</li>
+              <li>- Not share your account with others</li>
+              <li>- Provide accurate information about your health and fitness status</li>
+              <li>- Not attempt to reverse engineer or compromise the security of the service</li>
+              <li>- Respect the intellectual property rights of the service</li>
             </ul>
           </CardContent>
         </Card>
@@ -155,11 +165,7 @@ export default function TermsPage() {
           </CardHeader>
           <CardContent className="prose prose-gray dark:prose-invert max-w-none">
             <p>
-              If you have any questions about these Terms of Service, please contact us at:
-            </p>
-            <p>
-              Email: support@fitnesscoach.com<br />
-              Address: [Your Company Address]
+              If you have any questions about these Terms of Service, please contact us at our mail: admin@myfitnesscoach.net
             </p>
           </CardContent>
         </Card>

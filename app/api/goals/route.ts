@@ -37,6 +37,7 @@ export async function POST(req: Request) {
       const goal = await Goal.create({
         ...validatedData,
         userId,
+        currentProgress: 0,
         status: "not_started",
         createdAt: new Date(),
         updatedAt: new Date(),

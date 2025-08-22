@@ -23,6 +23,7 @@ import {
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Trash2, Pencil, RotateCcw } from "lucide-react";
+import { ProgressLogger } from "./ProgressLogger";
 
 interface Goal {
   _id: string;
@@ -425,34 +426,52 @@ const GoalCard = ({ goal, onProgressUpdate, showCategory = false, refreshGoals }
             />
           </div>
 
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1"
-              onClick={() => handleQuickAdd(10)}
-              disabled={isLoading}
-            >
-              +{calculateQuickAddValue(10)} {goal.unit}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1"
-              onClick={() => handleQuickAdd(30)}
-              disabled={isLoading}
-            >
-              +{calculateQuickAddValue(30)} {goal.unit}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1"
-              onClick={() => handleQuickAdd(50)}
-              disabled={isLoading}
-            >
-              +{calculateQuickAddValue(50)} {goal.unit}
-            </Button>
+          <div className="space-y-3">
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                onClick={() => handleQuickAdd(10)}
+                disabled={isLoading}
+              >
+                +{calculateQuickAddValue(10)} {goal.unit}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                onClick={() => handleQuickAdd(30)}
+                disabled={isLoading}
+              >
+                +{calculateQuickAddValue(30)} {goal.unit}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                onClick={() => handleQuickAdd(50)}
+                disabled={isLoading}
+              >
+                +{calculateQuickAddValue(50)} {goal.unit}
+              </Button>
+            </div>
+            
+            <div className="flex justify-center">
+              <ProgressLogger
+                goalId={goal._id}
+                goalTitle={goal.title}
+                unit={goal.unit}
+                currentProgress={currentProgress}
+                targetValue={goal.targetValue}
+                onProgressLogged={() => {
+                  // Refresh the goal data after logging progress
+                  if (refreshGoals) {
+                    refreshGoals();
+                  }
+                }}
+              />
+            </div>
           </div>
         </div>
       </CardContent>

@@ -1,4 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy - Your Data Protection',
+  description: 'Learn how FitCoach protects your personal information and fitness data. Our comprehensive privacy policy explains data collection, usage, and security measures.',
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function PrivacyPage() {
   return (
@@ -31,9 +41,9 @@ export default function PrivacyPage() {
               We collect information about you in a few different ways, including:
             </p>
             <ul>
-              <li>Information you provide to us directly</li>
-              <li>Information we collect automatically as you use our Service</li>
-              <li>Information from third-party sources</li>
+              <li>- Information you provide to us directly</li>
+              <li>- Information we collect automatically as you use our Service</li>
+              <li>- Information from third-party sources</li>
             </ul>
           </CardContent>
         </Card>
@@ -47,10 +57,10 @@ export default function PrivacyPage() {
               We use the information we collect to provide and improve our services, including to:
             </p>
             <ul>
-              <li>Personalize your experience</li>
-              <li>Provide customer support</li>
-              <li>Research and analyze usage trends</li>
-              <li>Communicate with you</li>
+              <li>- Personalize your experience</li>
+              <li>- Provide customer support</li>
+              <li>- Research and analyze usage trends</li>
+              <li>- Communicate with you</li>
             </ul>
           </CardContent>
         </Card>
@@ -64,8 +74,8 @@ export default function PrivacyPage() {
               We do not sell or rent your personal information to third parties. However, we may share information about you as follows:
             </p>
             <ul>
-              <li>With our affiliates or service providers</li>
-              <li>When we believe in good faith that disclosure is necessary to protect our rights, your safety, or the safety of others</li>
+              <li>- With our affiliates or service providers</li>
+              <li>- When we believe in good faith that disclosure is necessary to protect our rights, your safety, or the safety of others</li>
             </ul>
           </CardContent>
         </Card>
@@ -98,11 +108,7 @@ export default function PrivacyPage() {
           </CardHeader>
           <CardContent className="prose prose-gray dark:prose-invert max-w-none">
             <p>
-              If you have any questions or concerns about this Privacy Policy or the practices of this Site, please contact us at:
-            </p>
-            <p>
-              Email: privacy@fitnesscoach.com<br />
-              Address: [Your Company Address]
+              If you have any questions or concerns about this Privacy Policy or the practices of this Site, please contact us at our Email : admin@myfitnesscoach.tech
             </p>
           </CardContent>
         </Card>
